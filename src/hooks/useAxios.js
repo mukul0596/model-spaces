@@ -9,6 +9,7 @@ const customAxios = axios.create({
 customAxios.interceptors.request.use(
   (config) => {
     const newConfig = { ...config };
+    newConfig.mode = "no-cors";
     newConfig.metadata = { startTime: new Date() };
     return newConfig;
   },
