@@ -97,7 +97,7 @@ const ModelPredictResponse = ({ status, outputs, data, responseTime }) => {
             <Paper
               variant="outlined"
               elevation={0}
-              sx={{ p: 2, height: "100%" }}
+              sx={{ p: 2, height: "100%", wordWrap: "break-word" }}
             >
               {isLoading(status) ? (
                 _.times(3, (i) => <Skeleton key={uuidv4()} />)
@@ -113,12 +113,16 @@ const ModelPredictResponse = ({ status, outputs, data, responseTime }) => {
               sx={{ p: 2, height: "100%" }}
             >
               {outputs?.map((output) => (
-                <Stack spacing={0.5}>
+                <Stack spacing={1}>
                   <Stack direction="row" spacing={1}>
                     <Typography variant="body2" color="text.secondary">
                       {output?.name}
                     </Typography>
-                    <Tooltip title={output?.description} arrow>
+                    <Tooltip
+                      title={output?.description}
+                      arrow
+                      enterTouchDelay={0}
+                    >
                       <InfoOutlinedIcon
                         fontSize="small"
                         sx={{ color: "text.secondary" }}
