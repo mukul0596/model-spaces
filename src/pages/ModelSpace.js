@@ -13,7 +13,12 @@ import {
 import _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import useAxios from "../hooks/useAxios";
-import { isError, isLoading, isSuccess } from "../utils/statusHelpers";
+import {
+  isError,
+  isLoading,
+  isNotIdle,
+  isSuccess,
+} from "../utils/statusHelpers";
 import ModelPredictForm from "../components/ModelPredictForm";
 import { INPUT_TYPES } from "../constants/inputTypes";
 import ModelPredictResponse from "../components/ModelPredictResponse";
@@ -126,9 +131,11 @@ const ModelSpace = () => {
             handleFormSubmit={handleFormSubmit}
           />
 
-          <Box py={3}>
-            <Divider />
-          </Box>
+          {isNotIdle(submitStatus) && (
+            <Box py={3}>
+              <Divider />
+            </Box>
+          )}
           {isLoading(submitStatus) || isSuccess(submitStatus) ? (
             <ModelPredictResponse
               status={submitStatus}
